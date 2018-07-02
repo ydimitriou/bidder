@@ -2,6 +2,7 @@ package com.bluebanana.bidder.integration;
 
 import com.bluebanana.bidder.BidderApplication;
 import com.bluebanana.bidder.utils.FixtureLoader;
+import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +16,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -43,6 +45,7 @@ public class BidderShould {
     public void returnBidWithMaxPriceWhenCountryExistsInCampaign() throws Exception {
         String bidRequest = fixtureLoader.load("fixtures/bid/bid_matching_with_campaign.json");
         String campaigns = fixtureLoader.load("fixtures/campaign/matching_campaigns.json");
+        String bidSuccessResponse = fixtureLoader.load("fixtures/bid/expected_success_bid_response.json");
 
         when(restTemplate.getForObject(anyString(), any(Class.class))).thenReturn(campaigns);
 
@@ -53,5 +56,10 @@ public class BidderShould {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andReturn();
+
+        JSONObject actualContentResponse = new JSONObject(result.getResponse().getContentAsString());
+        JSONObject expectedContentResponse = new JSONObject(bidSuccessResponse);
+
+        assertThat(actualContentResponse).isEqualToComparingFieldByFieldRecursively(expectedContentResponse);
     }
 }

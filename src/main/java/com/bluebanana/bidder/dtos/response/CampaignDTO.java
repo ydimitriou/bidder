@@ -11,7 +11,7 @@ public class CampaignDTO {
     @JsonProperty("name")
     private String name;
     @JsonProperty("price")
-    private Long price;
+    private double price;
     @JsonProperty("adm")
     private String adm;
     @JsonProperty("targetedCountries")
@@ -24,7 +24,7 @@ public class CampaignDTO {
         return id;
     }
 
-    public Long getPrice() {
+    public double getPrice() {
         return price;
     }
 

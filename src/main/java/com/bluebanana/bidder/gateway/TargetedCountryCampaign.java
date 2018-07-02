@@ -12,10 +12,11 @@ import java.util.List;
 @Component
 public class TargetedCountryCampaign implements CampaignsGateway {
 
-    private static final String RETRIEVE_CAMPAIGNS_URI = "https://campaigns.apiblueprint.org/campaigns";
-    private static final ObjectMapper objectMapper = new ObjectMapper();
     @Autowired
     private RestTemplate restTemplate;
+
+    private static final String RETRIEVE_CAMPAIGNS_URI = "https://private-anon-810af767b8-campaignapi9.apiary-mock.com/campaigns";
+    private static final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public List<CampaignDTO> retrieveCampaigns() {
