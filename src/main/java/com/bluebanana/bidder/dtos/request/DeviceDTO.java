@@ -1,4 +1,4 @@
-package com.bluebanana.bidder.dtos;
+package com.bluebanana.bidder.dtos.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

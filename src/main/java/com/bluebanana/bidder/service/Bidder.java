@@ -1,7 +1,7 @@
 package com.bluebanana.bidder.service;
 
-import com.bluebanana.bidder.dtos.BidRequestDTO;
-import com.bluebanana.bidder.dtos.BidResponseDTO;
+import com.bluebanana.bidder.dtos.request.BidRequestDTO;
+import com.bluebanana.bidder.dtos.response.BidResponseDTO;
 
 import java.util.Optional;
 

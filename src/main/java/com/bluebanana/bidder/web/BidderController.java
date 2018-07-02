@@ -1,7 +1,7 @@
 package com.bluebanana.bidder.web;
 
-import com.bluebanana.bidder.dtos.BidRequestDTO;
-import com.bluebanana.bidder.dtos.BidResponseDTO;
+import com.bluebanana.bidder.dtos.request.BidRequestDTO;
+import com.bluebanana.bidder.dtos.response.BidResponseDTO;
 import com.bluebanana.bidder.service.Bidder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
