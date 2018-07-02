@@ -18,11 +18,11 @@ public class BidRequestDTO {
         return id;
     }
 
-    public AppDTO getAppDTO() {
-        return appDTO;
-    }
-
     public DeviceDTO getDeviceDTO() {
         return deviceDTO;
+    }
+
+    public String getCountry() {
+        return deviceDTO.getGeoDTO().getCountry();
     }
 }

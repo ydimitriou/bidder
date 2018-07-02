@@ -24,7 +24,7 @@ public class CampaignBidder implements Bidder {
     public Optional<BidResponseDTO> makeBid(BidRequestDTO bidRequestDTO) {
         List<CampaignDTO> campaigns = campaignsGateway.retrieveCampaigns();
         Optional<CampaignDTO> campaignDTO = campaigns.stream()
-                .filter(campaign ->  campaign.containsCountry(bidRequestDTO.getDeviceDTO().getGeoDTO().getCountry()))
+                .filter(campaign ->  campaign.containsCountry(bidRequestDTO.getCountry()))
                 .max(Comparator.comparing(CampaignDTO::getPrice));
 
         if (campaignDTO.isPresent()) {
