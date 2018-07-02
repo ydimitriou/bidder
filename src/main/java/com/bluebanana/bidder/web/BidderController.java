@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/bid")
 public class BidderController {
@@ -25,8 +27,12 @@ public class BidderController {
         consumes = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
     public HttpEntity<BidResponseDTO> bid(@RequestBody BidRequestDTO bidRequestDTO) {
-        BidResponseDTO bidResponseDTO = bidder.makeBid(bidRequestDTO);
+        Optional<BidResponseDTO> bidResponseDTO = bidder.makeBid(bidRequestDTO);
 
-        return new ResponseEntity<>(bidResponseDTO,HttpStatus.OK);
+        if (bidResponseDTO.isPresent()) {
+            return new ResponseEntity<>(bidResponseDTO.get(),HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
     }
 }
