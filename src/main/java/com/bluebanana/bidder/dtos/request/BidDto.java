@@ -2,7 +2,7 @@ package com.bluebanana.bidder.dtos.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class BidDTO {
+public class BidDto {
 
     @JsonProperty("campaignId")
     private String campaignId;
@@ -11,7 +11,7 @@ public class BidDTO {
     @JsonProperty("adm")
     private String adm;
 
-    public BidDTO(String campaignId, double price, String adm) {
+    public BidDto(String campaignId, double price, String adm) {
         this.campaignId = campaignId;
         this.price = price;
         this.adm = adm;

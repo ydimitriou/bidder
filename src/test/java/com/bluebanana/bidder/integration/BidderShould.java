@@ -84,6 +84,20 @@ public class BidderShould {
                 .andReturn();
     }
 
+    @Test
+    public void respondWithoutBidAndNoContentHttpStatusWhenThereAreNoCampaignsAvailable() throws Exception {
+        prepareFixtures(BID_NOT_MATCHING_WITH_CAMPAIGN, NO_MATCHING_CAMPAIGNS);
+        when(restTemplate.getForObject(anyString(), any(Class.class))).thenReturn("[]");
+
+        mockMvc.perform(post("/bid")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(bidRequest))
+                .andDo(print())
+                .andExpect(status().isNoContent())
+                .andReturn();
+    }
+
     private void prepareFixtures(String bidPath, String campaignPath) {
         bidRequest = fixtureLoader.load(bidPath);
         campaigns = fixtureLoader.load(campaignPath);

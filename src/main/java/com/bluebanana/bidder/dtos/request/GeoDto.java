@@ -2,7 +2,7 @@ package com.bluebanana.bidder.dtos.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class GeoDTO {
+public class GeoDto {
 
     @JsonProperty("country")
     private String country;
@@ -11,7 +11,7 @@ public class GeoDTO {
     @JsonProperty("lon")
     private Long lon;
 
-    public GeoDTO() {
+    public GeoDto() {
     }
 
     public String getCountry() {

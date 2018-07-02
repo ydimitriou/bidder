@@ -1,18 +1,18 @@
 package com.bluebanana.bidder.converter;
 
-import com.bluebanana.bidder.dtos.request.BidDTO;
-import com.bluebanana.bidder.dtos.response.BidResponseDTO;
-import com.bluebanana.bidder.dtos.response.CampaignDTO;
+import com.bluebanana.bidder.dtos.request.BidDto;
+import com.bluebanana.bidder.dtos.response.BidResponseDto;
+import com.bluebanana.bidder.dtos.response.CampaignDto;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CampaignConverter {
 
-    public BidResponseDTO toBidResponseDTO(CampaignDTO campaignDTO, String id) {
-        BidDTO bidDTO = new BidDTO(campaignDTO.getId(),
-                campaignDTO.getPrice(),
-                campaignDTO.getAdm());
+    public BidResponseDto toBidResponseDTO(String id, CampaignDto campaignDto) {
+        BidDto bidDto = new BidDto(campaignDto.getId(),
+                campaignDto.getPrice(),
+                campaignDto.getAdm());
 
-        return new BidResponseDTO(id, bidDTO);
+        return new BidResponseDto(id, bidDto);
     }
 }

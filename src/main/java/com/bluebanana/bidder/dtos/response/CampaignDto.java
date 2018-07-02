@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class CampaignDTO {
+public class CampaignDto {
 
     @JsonProperty("id")
     private String id;
@@ -17,7 +17,17 @@ public class CampaignDTO {
     @JsonProperty("targetedCountries")
     private List<String> targetedCountries;
 
-    public CampaignDTO() {
+    public CampaignDto(String id,
+                       String name,
+                       double price,
+                       String adm,
+                       List<String> targetedCountries
+    ) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.adm = adm;
+        this.targetedCountries = targetedCountries;
     }
 
     public String getId() {

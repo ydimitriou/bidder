@@ -2,17 +2,17 @@ package com.bluebanana.bidder.dtos.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class DeviceDTO {
+public class DeviceDto {
 
     @JsonProperty("os")
     private String os;
     @JsonProperty("geo")
-    private GeoDTO geoDTO;
+    private GeoDto geoDto;
 
-    public DeviceDTO() {
+    public DeviceDto() {
     }
 
-    public GeoDTO getGeoDTO() {
-        return geoDTO;
+    public GeoDto getGeoDto() {
+        return geoDto;
     }
 }

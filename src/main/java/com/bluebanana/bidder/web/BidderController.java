@@ -1,7 +1,7 @@
 package com.bluebanana.bidder.web;
 
-import com.bluebanana.bidder.dtos.request.BidRequestDTO;
-import com.bluebanana.bidder.dtos.response.BidResponseDTO;
+import com.bluebanana.bidder.dtos.request.BidRequestDto;
+import com.bluebanana.bidder.dtos.response.BidResponseDto;
 import com.bluebanana.bidder.service.Bidder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -23,8 +23,8 @@ public class BidderController {
         produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
         consumes = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
-    public HttpEntity<BidResponseDTO> bid(@RequestBody BidRequestDTO bidRequestDTO) {
-        Optional<BidResponseDTO> bidResponseDTO = bidder.makeBid(bidRequestDTO);
+    public HttpEntity<BidResponseDto> bid(@RequestBody BidRequestDto bidRequestDto) {
+        Optional<BidResponseDto> bidResponseDTO = bidder.makeBid(bidRequestDto);
 
         if (bidResponseDTO.isPresent()) {
             return new ResponseEntity<>(bidResponseDTO.get(), HttpStatus.OK);

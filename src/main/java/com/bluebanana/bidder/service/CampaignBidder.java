@@ -1,9 +1,9 @@
 package com.bluebanana.bidder.service;
 
 import com.bluebanana.bidder.converter.CampaignConverter;
-import com.bluebanana.bidder.dtos.request.BidRequestDTO;
-import com.bluebanana.bidder.dtos.response.BidResponseDTO;
-import com.bluebanana.bidder.dtos.response.CampaignDTO;
+import com.bluebanana.bidder.dtos.request.BidRequestDto;
+import com.bluebanana.bidder.dtos.response.BidResponseDto;
+import com.bluebanana.bidder.dtos.response.CampaignDto;
 import com.bluebanana.bidder.gateway.CampaignsGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,14 +21,14 @@ public class CampaignBidder implements Bidder {
     private CampaignConverter campaignConverter;
 
     @Override
-    public Optional<BidResponseDTO> makeBid(BidRequestDTO bidRequestDTO) {
-        List<CampaignDTO> campaigns = campaignsGateway.retrieveCampaigns();
-        Optional<CampaignDTO> campaignDTO = campaigns.stream()
-                .filter(campaign ->  campaign.containsCountry(bidRequestDTO.getCountry()))
-                .max(Comparator.comparing(CampaignDTO::getPrice));
+    public Optional<BidResponseDto> makeBid(BidRequestDto bidRequestDto) {
+        List<CampaignDto> campaigns = campaignsGateway.retrieveCampaigns();
+        Optional<CampaignDto> campaignDTO = campaigns.stream()
+                .filter(campaign ->  campaign.containsCountry(bidRequestDto.getCountry()))
+                .max(Comparator.comparing(CampaignDto::getPrice));
 
         if (campaignDTO.isPresent()) {
-            return Optional.of(campaignConverter.toBidResponseDTO(campaignDTO.get(), bidRequestDTO.getId()));
+            return Optional.of(campaignConverter.toBidResponseDTO(bidRequestDto.getId(), campaignDTO.get()));
         } else {
             return Optional.empty();
         }
