@@ -29,12 +29,15 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @SpringBootTest(classes = {BidderApplication.class})
 public class BidderShould {
 
+    private static final String BID_MATCHING_WITH_CAMPAIGN = "fixtures/bid/bid_matching_with_campaign.json";
+    private static final String MATCHING_CAMPAIGNS = "fixtures/campaign/matching_campaigns.json";
+    private static final FixtureLoader fixtureLoader = new FixtureLoader();
+    private MockMvc mockMvc;
+
     @MockBean
     RestTemplate restTemplate;
     @Autowired
     private WebApplicationContext webApplicationContext;
-    private MockMvc mockMvc;
-    private FixtureLoader fixtureLoader = new FixtureLoader();
 
     @Before
     public void setUp() {
@@ -42,9 +45,9 @@ public class BidderShould {
     }
 
     @Test
-    public void returnBidWithMaxPriceWhenCountryExistsInCampaign() throws Exception {
-        String bidRequest = fixtureLoader.load("fixtures/bid/bid_matching_with_campaign.json");
-        String campaigns = fixtureLoader.load("fixtures/campaign/matching_campaigns.json");
+    public void respondWithTheBidForHighestPayingCampaignThatMatchesTheTargetingCriteria() throws Exception {
+        String bidRequest = fixtureLoader.load(BID_MATCHING_WITH_CAMPAIGN);
+        String campaigns = fixtureLoader.load(MATCHING_CAMPAIGNS);
         String bidSuccessResponse = fixtureLoader.load("fixtures/bid/expected_success_bid_response.json");
 
         when(restTemplate.getForObject(anyString(), any(Class.class))).thenReturn(campaigns);
@@ -61,5 +64,21 @@ public class BidderShould {
         JSONObject expectedContentResponse = new JSONObject(bidSuccessResponse);
 
         assertThat(actualContentResponse).isEqualToComparingFieldByFieldRecursively(expectedContentResponse);
+    }
+
+    @Test
+    public void respondWithoutBidAndNoContentHttpStatusWhenThereAreNoMatchingCampaigns() throws Exception {
+        String bidRequest = fixtureLoader.load("fixtures/bid/bid_not_matching_with_campaigns.json");
+        String campaigns = fixtureLoader.load("fixtures/campaign/no_matching_campaigns.json");
+
+        when(restTemplate.getForObject(anyString(), any(Class.class))).thenReturn(campaigns);
+
+        mockMvc.perform(post("/bid")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(bidRequest))
+                .andDo(print())
+                .andExpect(status().isNoContent())
+                .andReturn();
     }
 }
