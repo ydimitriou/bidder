@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.0.3.RELEASE'
+		springBootVersion = "${springBootVersion}"
 	}
 	repositories {
 		mavenCentral()
@@ -26,5 +26,14 @@ repositories {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+
+	testCompile(
+			[group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: "${springBootVersion}"],
+			[group: 'org.mockito', name: 'mockito-core', version: "${mockitoVersion}"],
+			[group: 'org.junit.vintage', name: 'junit-vintage-engine', version: "${jUnitVintageVersion}"],
+			[group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: "${jUnitJupiterApiVersion}"],
+			[group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: "${jUnitJupiterEngineVersion}"],
+			[group: 'org.assertj', name: 'assertj-core', version: "${assertjVersion}"],
+			[group: 'com.google.guava', name: 'guava', version: "${guavaVersion}"]
+	)
 }
