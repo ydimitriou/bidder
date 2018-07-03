@@ -8,7 +8,4 @@ public class AppDto {
     private String id;
     @JsonProperty("name")
     private String name;
-
-    public AppDto() {
-    }
 }

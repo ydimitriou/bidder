@@ -1,7 +1,7 @@
 package com.bluebanana.bidder.integration;
 
 import com.bluebanana.bidder.BidderApplication;
-import com.bluebanana.bidder.utils.FixtureLoader;
+import com.bluebanana.bidder.fixture.FixtureLoader;
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;

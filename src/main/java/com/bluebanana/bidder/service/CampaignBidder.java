@@ -23,14 +23,14 @@ public class CampaignBidder implements Bidder {
     @Override
     public Optional<BidResponseDto> makeBid(BidRequestDto bidRequestDto) {
         List<CampaignDto> campaigns = campaignsGateway.retrieveCampaigns();
-        Optional<CampaignDto> campaignDTO = campaigns.stream()
+        Optional<CampaignDto> campaignDto = campaigns.stream()
                 .filter(campaign ->  campaign.containsCountry(bidRequestDto.getCountry()))
                 .max(Comparator.comparing(CampaignDto::getPrice));
 
-        if (campaignDTO.isPresent()) {
-            return Optional.of(campaignConverter.toBidResponseDTO(bidRequestDto.getId(), campaignDTO.get()));
-        } else {
+        if (!campaignDto.isPresent()) {
             return Optional.empty();
         }
+
+        return Optional.of(campaignConverter.toBidResponseDTO(bidRequestDto.getId(), campaignDto.get()));
     }
 }

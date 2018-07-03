@@ -9,9 +9,6 @@ public class DeviceDto {
     @JsonProperty("geo")
     private GeoDto geoDto;
 
-    public DeviceDto() {
-    }
-
     public GeoDto getGeoDto() {
         return geoDto;
     }

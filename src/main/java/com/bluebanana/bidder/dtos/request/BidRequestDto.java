@@ -11,9 +11,6 @@ public class BidRequestDto {
     @JsonProperty("device")
     private DeviceDto deviceDTO;
 
-    public BidRequestDto() {
-    }
-
     public String getId() {
         return id;
     }

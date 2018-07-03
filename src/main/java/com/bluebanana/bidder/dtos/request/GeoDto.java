@@ -11,9 +11,6 @@ public class GeoDto {
     @JsonProperty("lon")
     private Long lon;
 
-    public GeoDto() {
-    }
-
     public String getCountry() {
         return country;
     }

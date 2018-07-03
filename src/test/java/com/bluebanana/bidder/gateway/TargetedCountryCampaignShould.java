@@ -1,7 +1,7 @@
 package com.bluebanana.bidder.gateway;
 
 import com.bluebanana.bidder.dtos.response.CampaignDto;
-import com.bluebanana.bidder.utils.FixtureLoader;
+import com.bluebanana.bidder.fixture.FixtureLoader;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

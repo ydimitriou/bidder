@@ -17,6 +17,9 @@ public class CampaignDto {
     @JsonProperty("targetedCountries")
     private List<String> targetedCountries;
 
+    public CampaignDto() {
+    }
+
     public CampaignDto(String id,
                        String name,
                        double price,

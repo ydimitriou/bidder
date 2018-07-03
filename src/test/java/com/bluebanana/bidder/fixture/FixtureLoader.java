@@ -1,4 +1,4 @@
-package com.bluebanana.bidder.utils;
+package com.bluebanana.bidder.fixture;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
