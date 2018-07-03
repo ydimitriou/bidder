@@ -54,10 +54,10 @@ public class TargetedCountryCampaignShould {
 
     @Test
     public void throwProperRunTimeExceptionWhenRetrieveCampaignsFail() throws Exception {
+        doThrow(new RuntimeException()).when(restTemplate).getForObject(anyString(), any(Class.class));
+
         exception.expect(RuntimeException.class);
         exception.expectMessage("Failed to retrieve campaigns");
-
-        doThrow(new RuntimeException()).when(restTemplate).getForObject(anyString(), any(Class.class));
 
         targetedCountryCampaign.retrieveCampaigns();
     }

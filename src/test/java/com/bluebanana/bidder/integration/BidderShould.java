@@ -53,7 +53,6 @@ public class BidderShould {
     public void respondWithTheBidForHighestPayingCampaignThatMatchesTheTargetingCriteria() throws Exception {
         prepareFixtures(BID_MATCHING_WITH_CAMPAIGN, MATCHING_CAMPAIGNS);
         String bidSuccessResponse = fixtureLoader.load(SUCCESS_BID_RESPONSE);
-
         prepareMockCampaigns();
 
         MvcResult result = mockMvc.perform(post("/bid")

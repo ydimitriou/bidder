@@ -38,6 +38,7 @@ public class CampaignBidderShould {
     @Test
     public void returnEmptyOptionalWhenCampaignsNotAvailable() throws Exception {
         when(campaignsGateway.retrieveCampaigns()).thenReturn(Collections.EMPTY_LIST);
+
         Optional<BidResponseDto> actualResponse = campaignBidder.makeBid(bidRequestDto);
 
         assertThat(actualResponse).isEqualTo(Optional.empty());
@@ -57,7 +58,6 @@ public class CampaignBidderShould {
     public void returnTheHighestPayingCampaignWhenCampaignsMatchTargetingCriteria() throws Exception {
         when(bidRequestDto.getId()).thenReturn("1234");
         when(bidRequestDto.getCountry()).thenReturn("GRE");
-
         when(campaignsGateway.retrieveCampaigns()).thenReturn(Arrays.asList(campaignDto1, campaignDto2));
         when(campaignConverter.toBidResponseDTO("1234", campaignDto1)).thenReturn(bidResponseDto);
 
