@@ -8,7 +8,6 @@ import com.bluebanana.bidder.gateway.CampaignsGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,13 +18,16 @@ public class CampaignBidder implements Bidder {
     private CampaignsGateway campaignsGateway;
     @Autowired
     private CampaignConverter campaignConverter;
+    @Autowired
+    private Filter campaignFilter;
+    @Autowired
+    private CampaignCriteria campaignCriteria;
 
     @Override
     public Optional<BidResponseDto> makeBid(BidRequestDto bidRequestDto) {
         List<CampaignDto> campaigns = campaignsGateway.retrieveCampaigns();
-        Optional<CampaignDto> campaignDto = campaigns.stream()
-                .filter(campaign ->  campaign.containsCountry(bidRequestDto.getCountry()))
-                .max(Comparator.comparing(CampaignDto::getPrice));
+        campaigns = campaignFilter.byCountry(bidRequestDto.getCountry(), campaigns);
+        Optional<CampaignDto> campaignDto = campaignCriteria.withMaxPrice(campaigns);
 
         if (!campaignDto.isPresent()) {
             return Optional.empty();
