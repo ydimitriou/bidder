@@ -1,7 +1,7 @@
 # Bidder
 A bidder platform which allows advertisers to submit bids to buy mobile ad space in real-time.
 The platform receives bid requests from 3rd-party ad exchanges and retrieves all available campaigns filtering
-them by targeting country and responde with the highest bid in terms of bid price.
+them by targeting country and respond with the highest bid in terms of bid price.
 
 # Installation
 This project requires Java 8 to be installed. If java 8 is not installed please follow
